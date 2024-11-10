@@ -1,0 +1,29 @@
+# laravel-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: laravel-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: laravel
+  template:
+    metadata:
+      labels:
+        app: laravel
+    spec:
+      containers:
+      - name: laravel
+        image: laravel-app:latest
+        ports:
+        - containerPort: 80
+        env:
+        - name: DB_HOST
+          value: "mysql-service"
+        - name: DB_DATABASE
+          value: "your_database"
+        - name: DB_USERNAME
+          value: "your_username"
+        - name: DB_PASSWORD
+          value: "your_password"
